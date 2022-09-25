@@ -32,7 +32,26 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.soundboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.item {
+  margin: 0.7em;
+  width: 15em;
+  height: 15em;
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  height: auto;
 }
