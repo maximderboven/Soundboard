@@ -1,0 +1,49 @@
+{
+  "soundboards": [
+    {
+      "id": 1,
+      "name": "Minecraft",
+      "image": "https://seeklogo.com/images/M/minecraft-logo-5EAD3A1535-seeklogo.com.png"
+    },
+    {
+      "id": 2,
+      "name": "Discord",
+      "image": "https://cdn.worldvectorlogo.com/logos/discord-4.svg"
+    }
+  ],
+  "sounds": [
+    {
+      "id": 1,
+      "soundboardId": 1,
+      "name": "Minecraft Hurt Sound",
+      "image": "https://www.nicepng.com/png/detail/72-727302_minecraft-transparent-half-a-heart-minecraft-heart-png.png",
+      "sound": "https://www.myinstants.com/media/sounds/classic_hurt.mp3",
+      "quote": "HUH"
+    },
+    {
+      "id": 2,
+      "soundboardId": 1,
+      "name": "Minecraft zombie sound",
+      "image": "https://static.wikia.nocookie.net/minecraft_nl_gamepedia/images/c/c3/Zombie.png",
+      "sound": "https://www.myinstants.com/media/sounds/old-sound-of-zombie-in-minecraft.mp3",
+      "quote": "GRRRRR"
+    },
+    {
+      "id": 1,
+      "soundboardId": 2,
+      "name": "Discord Notification",
+      "image": "https://cdn.iconscout.com/icon/free/png-256/discord-3-569463.png",
+      "sound": "https://www.myinstants.com/media/sounds/discord-notification.mp3",
+      "quote": "pom pom"
+    },
+    {
+      "id": 2,
+      "soundboardId": 2,
+      "name": "Discord Call",
+      "image": "https://i.ytimg.com/vi/Pcm98zD3ZvQ/maxresdefault.jpg",
+      "sound": "https://www.myinstants.com/media/sounds/discord-call-sound.mp3",
+      "quote": "Song Playing"
+    }
+
+  ]
+}

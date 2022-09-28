@@ -1,22 +1,22 @@
 import "./Soundboard.css";
-import {SoundboardItem} from "./SoundboardItem";
 import axios from "axios";
-import {UseParams, useParams} from "react-router-dom";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useParams, } from "react";
+import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import { CircularProgress } from '@mui/material';
 axios.defaults.baseURL = "http://localhost:3001";
 
-export function Soundboard() {
-  const {id} = useParams();
-  const [items, setItems] = useState(null);
+
+
+
+export function Soundboards() {
+  const [boards, setItems] = useState(null);
   const [loading, setIsLoading] = useState(true);
-  const [quote, setQuote] = useState(null);
 
   useEffect(() => {
     async function fetchItems() {
       try {
         await axios
-          .get(`/soundboards/${id}/sounds`)
+          .get(`/soundboards/`)
           .then((response) => {
             setItems(response.data);
           })
@@ -33,27 +33,22 @@ export function Soundboard() {
       }
     }
     fetchItems();
-}, []);
+  }, []);
 
-
-if (loading) {
-  return <CircularProgress />;
-} else {
-  return (
-    <div className="App">
-      {quote && <div className="soundboardQuote">{quote}</div>}
-      <div className="soundboard">
-        {items.map((item) => (
-          <SoundboardItem
-            key={item.id}
-            item={item}
-            onSoundStart={() => setQuote(item.quote)}
-            onSoundEnd={() => setQuote(null)}
-          ></SoundboardItem>
+  if (loading) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div className="soundboards">
+        {boards.map((board) => (
+          <Link key={board.id} to={`/soundboards/${board.id}`}>
+            <div className={`item ${board.id}`}>
+              <img alt={board.image} src={board.image} />
+              {board.name}
+            </div>
+          </Link>
         ))}
       </div>
-    </div>
-  );
-}
-
+    );
+  }
 }
