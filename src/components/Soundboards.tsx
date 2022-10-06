@@ -1,6 +1,7 @@
 import "./Soundboard.css";
 import axios from "axios";
-import {useState, useEffect, useParams, } from "react";
+import { Board } from "../model/Board";
+import {useState, useEffect } from "react";
 import {BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import { CircularProgress } from '@mui/material';
 axios.defaults.baseURL = "http://localhost:3001";
@@ -9,7 +10,7 @@ axios.defaults.baseURL = "http://localhost:3001";
 
 
 export function Soundboards() {
-  const [boards, setItems] = useState(null);
+  const [boards, setItems] = useState<Board[] | null>(null);
   const [loading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export function Soundboards() {
           .catch((error) => {
             console.log(error.response.data.error);
           });
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.response); // this is the main part. Use the response property from the error object
         return error.response;
       }
@@ -35,7 +36,7 @@ export function Soundboards() {
     fetchItems();
   }, []);
 
-  if (loading) {
+  if (loading|| !boards) {
     return <div>Loading...</div>;
   } else {
     return (

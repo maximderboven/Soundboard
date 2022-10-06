@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { Item } from '../model/Item';
+
+interface SoundboardItemProps {
+  item: Item;
+  onSoundStart: () => void;
+  onSoundEnd: () => void;
+}
 
 
-
-export function SoundboardItem({item, onSoundStart, onSoundEnd}) {
+export function SoundboardItem({item, onSoundStart, onSoundEnd}: SoundboardItemProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  function playSound(sound, onSoundStart, onSoundEnd) {
+  function playSound(sound:string, onSoundStart:()=>void, onSoundEnd:()=>void) {
     const audio = new Audio(sound);
     audio.addEventListener("canplaythrough", () => {
       audio.play();

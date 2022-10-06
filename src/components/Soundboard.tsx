@@ -1,16 +1,19 @@
 import "./Soundboard.css";
 import {SoundboardItem} from "./SoundboardItem";
 import axios from "axios";
-import {UseParams, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
-import { CircularProgress } from '@mui/material';
+import { Item } from '../model/Item';
+import { CircularProgress, Alert } from '@mui/material';
 axios.defaults.baseURL = "http://localhost:3001";
+
 
 export function Soundboard() {
   const {id} = useParams();
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState<Item[] | null>(null);
   const [loading, setIsLoading] = useState(true);
-  const [quote, setQuote] = useState(null);
+  const [isError, setIsError] = useState(false);
+  const [quote, setQuote] = useState<String | null>(null);
 
   useEffect(() => {
     async function fetchItems() {
@@ -25,20 +28,25 @@ export function Soundboard() {
           })
           .finally(() => setIsLoading(false))
           .catch((error) => {
+            setIsError(true);
+            setIsLoading(false);
             console.log(error.response.data.error);
           });
-      } catch (error) {
+      } catch (error: any) {
         console.log(error.response); // this is the main part. Use the response property from the error object
         return error.response;
       }
     }
     fetchItems();
-}, []);
+}, [id]);
 
-
-if (loading) {
+if (isError || !items) {
+  return <Alert severity="error">Items could not be loaded</Alert>;
+ } else if (loading) {
   return <CircularProgress />;
-} else {
+}else if (isError) {
+  return <Alert severity="error">Board could not be loaded</Alert>;
+}else {
   return (
     <div className="App">
       {quote && <div className="soundboardQuote">{quote}</div>}
@@ -48,8 +56,7 @@ if (loading) {
             key={item.id}
             item={item}
             onSoundStart={() => setQuote(item.quote)}
-            onSoundEnd={() => setQuote(null)}
-          ></SoundboardItem>
+            onSoundEnd={() => setQuote(null)}></SoundboardItem>
         ))}
       </div>
     </div>
