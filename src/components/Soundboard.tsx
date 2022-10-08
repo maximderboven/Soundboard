@@ -4,7 +4,8 @@ import axios from "axios";
 import {useParams} from "react-router-dom";
 import {useState, useEffect} from "react";
 import { Item } from '../model/Item';
-import { CircularProgress, Alert } from '@mui/material';
+import { CircularProgress, Alert, Fab } from '@mui/material';
+import { AddIcon } from '@mui/icons-material';
 axios.defaults.baseURL = "http://localhost:3001";
 
 
@@ -56,8 +57,12 @@ if (isError || !items) {
             key={item.id}
             item={item}
             onSoundStart={() => setQuote(item.quote)}
-            onSoundEnd={() => setQuote(null)}></SoundboardItem>
+            onSoundEnd={() => setQuote(null)}
+          ></SoundboardItem>
         ))}
+        <Fab color="secondary" aria-label="add" className="fixediconplus">
+          <AddIcon />
+        </Fab>
       </div>
     </div>
   );
