@@ -1,8 +1,8 @@
+import {Item} from "./Item";
+
 export interface Board {
-    id: number;
+    id: string;
     name: string;
     image: string;
-    sound: string;
-    quote: string;
- }
- 
+    items: Item[];
+}

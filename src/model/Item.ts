@@ -1,8 +1,10 @@
 export interface Item {
-    id: number;
+    id: string;
+    soundboardId: string;
     name: string;
+    quote: string;
     image: string;
     sound: string;
-    quote: string;
- }
+}
+ export type ItemData = Omit<Item, "id" | "soundboardId">;
  

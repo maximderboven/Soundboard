@@ -43,7 +43,14 @@
       "image": "https://i.ytimg.com/vi/Pcm98zD3ZvQ/maxresdefault.jpg",
       "sound": "https://www.myinstants.com/media/sounds/discord-call-sound.mp3",
       "quote": "Song Playing"
+    },
+    {
+      "name": "test",
+      "quote": "test",
+      "image": "test",
+      "sound": "test",
+      "soundboardId": "1",
+      "id": 3
     }
-
   ]
 }

@@ -8,15 +8,9 @@
     box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) 
 }
 .fixediconplus {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
+    position: absolute!important;
+    bottom: 20px!important;
+    right: 20px!important;
+    z-index: 100!important;
     font-size: 2rem;
-    color: #fff;
-    background-color: #000;
-    border-radius: 50%;
-    padding: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
     }

@@ -7,7 +7,10 @@ import { CircularProgress } from '@mui/material';
 axios.defaults.baseURL = "http://localhost:3001";
 
 
-
+export const getBoards = async () => {
+  const boards = await axios.get<Board[]>('/soundboards');
+  return boards.data;
+};
 
 export function Soundboards() {
   const [boards, setItems] = useState<Board[] | null>(null);

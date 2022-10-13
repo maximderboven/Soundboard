@@ -6,37 +6,54 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Controller from '../controller/Controller';
-import { useForm } from 'react-hook-form';
+import {Controller, useForm} from "react-hook-form";
+import {ItemData} from "../model/Item";
 
-export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
-  const { control, handleSubmit, reset, formState: {errors}, } = useForm({
-    defaultValues: {
-        name: '',
-        quote: '',
-        image: '',
-        sound: '',
+const REQUIRED_FIELD_MESSAGE = "This field is required";
+const MIN_LENGHT_MESSAGE = (length: number) =>
+    `Please enter minimum ${length} characters.`;
+
+    interface AddItemDialogProps {
+      isOpen: boolean;
+      onClose: () => void;
+      onSubmit: (data: ItemData) => void;
     }
+
+export default function AdditemDialog({
+  isOpen,
+  onClose,
+  onSubmit,
+}: AddItemDialogProps) {
+  const [open, setOpen] = React.useState(false);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: "",
+      quote: "",
+      image: "",
+      sound: "",
+    },
   });
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+  const _onSubmit = (data: ItemData) => {
+    onSubmit(data);
+    reset();
+    onClose();
   };
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={isOpen} onClose={onClose}>
         <DialogTitle>Nieuw Item</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Voeg een nieuw item toe aan de soundboard
           </DialogContentText>
-          <form onSubmit={handleSubmit((data) => console.log(data))}>
+          <form onSubmit={handleSubmit(_onSubmit)}>
             <Controller
               name="name"
               control={control}
@@ -77,13 +94,6 @@ export default function FormDialog() {
               rules={{
                 required: true,
                 minLength: { value: 3, message: "Min length is 3" },
-                Validate: (value) => {
-                  if (value.includes("http")) {
-                    return true;
-                  } else {
-                    return "URL is not valid";
-                  }
-                }
               }}
               render={({ field }) => (
                 <TextField
@@ -101,13 +111,6 @@ export default function FormDialog() {
               rules={{
                 required: true,
                 minLength: { value: 3, message: "Min length is 3" },
-                Validate: (value) => {
-                  if (value.includes("http")) {
-                    return true;
-                  } else {
-                    return "URL is not valid";
-                  }
-                }
               }}
               render={({ field }) => (
                 <TextField
@@ -123,8 +126,12 @@ export default function FormDialog() {
           </form>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Annuleer</Button>
-          <Button onClick={handleClose}>Toevoegen</Button>
+          <Button type="reset" variant="outlined" onClick={() => reset()}>
+            Clear
+          </Button>
+          <Button type="submit" variant="contained">
+            Add
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
